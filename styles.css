@@ -1,3 +1,41 @@
-h1 {
-    color: red;
+#calculator {
+    width: 500px;
+    height: 700px;
+    margin: auto auto;
+    background-color: black;
+    padding-top: 50px;
+}
+
+#display {
+    height: 50px;
+    width: 400px;
+    background-color: white;
+    margin: 10px auto auto auto;
+}
+
+#buttons {
+    height: 400px;
+    width: 400px;
+    background-color: white;
+    margin: 50px 50px;
+    display: grid;
+    grid-template-columns: repeat(5,1fr);
+    grid-template-rows: repeat(4, 1fr);
+}
+
+#equals {
+    grid-column: 5 / 6;
+    grid-row: 2 / 5;
+}
+
+#zero {
+    grid-column: 1 / 3;
+}
+
+.button {
+    background-color: grey;
+    margin: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
