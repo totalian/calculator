@@ -7,12 +7,14 @@ const setEvents = () => {
 
 function addToDisplay(number){
     let currentDisplay = display.innerHTML
-    currentDisplay == 0 ? newDisplay = number : newDisplay = currentDisplay + number
-    setDisplay(newDisplay)
+    if(currentDisplay.length < 8){
+        currentDisplay == 0 ? newDisplay = number : newDisplay = currentDisplay + number
+        setDisplay(newDisplay)
+    }
 }
 
-function multiply(x,y){
-    Number(x) * Number(y)
+function add(x,y){
+    Number(x) + Number(y)
 }
 
 window.onload = (() => {
