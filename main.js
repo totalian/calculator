@@ -1,6 +1,7 @@
 const display = document.querySelector('#display')
 const numbers = document.querySelectorAll('.number')
 const operations = document.querySelectorAll('.operation')
+const equals = document.querySelector('#equals')
 // const addButton = document.querySelector('#add')
 // const subtractButton = document.querySelector('#subtract')
 // const multiplyButton = document.querySelector('#multiply')
@@ -10,6 +11,7 @@ const setDisplay = value => display.innerHTML = value
 const setEvents = () => {
     numbers.forEach(number => number.addEventListener('click', event => addToDisplay(event.target.textContent)))
     operations.forEach(operation => operation.addEventListener('click', (e) => operationMode(e)))
+    equals.addEventListener('click', () => equate())
 }
 let mode
 
@@ -59,6 +61,15 @@ function evaluate(){
     newValue = 0
     memory = [total,newValue,add]
     return total
+}
+
+function equate(){
+    [total,newValue,operation] = memory
+    let capture = display.innerHTML
+    memory = [total,capture,operation]
+    display.innerHTML = evaluate()
+    mode = "overwrite"
+    memory = [0,null,add]
 }
 
 
