@@ -1,10 +1,15 @@
 const display = document.querySelector('#display')
 const numbers = document.querySelectorAll('.number')
 const operations = document.querySelectorAll('.operation')
+// const addButton = document.querySelector('#add')
+// const subtractButton = document.querySelector('#subtract')
+// const multiplyButton = document.querySelector('#multiply')
+// const divideButton = document.querySelector('#divide')
+const equalsButton = document.querySelector('#equals')
 const setDisplay = value => display.innerHTML = value
 const setEvents = () => {
     numbers.forEach(number => number.addEventListener('click', event => addToDisplay(event.target.textContent)))
-    operations.forEach(operation => operation.addEventListener('click', () => operationMode()))
+    operations.forEach(operation => operation.addEventListener('click', (e) => operationMode(e)))
 }
 let mode
 
@@ -22,13 +27,29 @@ function addToDisplay(number){
     mode = "standard"
 }
 
-function operationMode(){
+function operationMode(e){
     [total,newValue,operation] = memory
-    if(!newValue){
-        memory = [total, display.innerHTML, add]
-    }
+    let capture = display.innerHTML
+    memory = [total,capture,operation]
     display.innerHTML = evaluate()
     mode = "overwrite"
+    let newOperation
+    switch(e.target.innerHTML){
+        case "+":
+            newOperation = add
+            break
+        case "-":
+            newOperation = subtract
+            break
+        case "x":
+            newOperation = multiply
+            break
+        case "/":
+            newOperation = divide
+            break
+    }
+    [total,newValue,operation] = memory
+    memory = [total,newValue,newOperation]
 }
 
 function evaluate(){
@@ -48,17 +69,17 @@ function add(values){
 
 function subtract(values){
     [value1,value2] = values
-    return value1 - value2
+    return parseFloat(value1) - parseFloat(value2)
 }
 
 function multiply(values){
     [value1,value2] = values
-    return value1 * value2
+    return parseFloat(value1) * parseFloat(value2)
 }
 
 function divide(values){
     [value1,value2] = values
-    return value1 / value2
+    return parseFloat(value1) / parseFloat(value2)
 }
 
 window.onload = (() => {
